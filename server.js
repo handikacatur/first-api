@@ -1,7 +1,9 @@
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
-const errorHandler = require('./middleware/error.js')
-const connectDB = require('./config/db.js')
+const fileupload = require('express-fileupload');
+const errorHandler = require('./middleware/error.js');
+const connectDB = require('./config/db.js');
 
 // load env vars
 dotenv.config({path: './config/config.env'});
@@ -17,6 +19,12 @@ const app = express();
 
 // using Body parser
 app.use(express.json());
+
+// File Uploading
+app.use(fileupload());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // mount routers
 app.use('/api/v1/bootcamps', bootcamps);
