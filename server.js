@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const fileupload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error.js');
 const connectDB = require('./config/db.js');
 
@@ -20,6 +21,9 @@ const app = express();
 
 // using Body parser
 app.use(express.json());
+
+// Cookie parser
+app.use(cookieParser());
 
 // File Uploading
 app.use(fileupload());
